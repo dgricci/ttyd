@@ -1,0 +1,19 @@
+## Share your terminal over the web
+# Cf. https://github.com/tsl0922/ttyd
+FROM dgricci/build-jessie:0.0.4
+MAINTAINER Didier Richard <didier.richard@ign.fr>
+
+## arguments
+ARG LWS_VERSION
+ENV LWS_VERSION ${LWS_VERSION:-2.1.1}
+ARG LWS_DOWNLOAD_URL
+ENV LWS_DOWNLOAD_URL ${LWS_DOWNLOAD_URL:-https://github.com/warmcat/libwebsockets/archive/v$LWS_VERSION.zip}
+ARG TTYD_VERSION
+ENV TTYD_VERSION ${TTYD_VERSION:-1.3.0}
+ARG TTYD_DOWNLOAD_URL
+ENV TTYD_DOWNLOAD_URL ${TTYD_DOWNLOAD_URL:-https://github.com/tsl0922/ttyd/archive/$TTYD_VERSION.zip}
+
+COPY build.sh /tmp/build.sh
+
+RUN /tmp/build.sh && rm -f /tmp/build.sh
+
